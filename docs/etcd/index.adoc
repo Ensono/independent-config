@@ -1,0 +1,11 @@
+=== Etcd
+
+Etcd is a distributed key-value store that is designed to provide a reliable way to store data across a cluster of machines. It is a core component of Kubernetes and is used to store configuration data and secrets.
+
+The API to communicate with Etcd is very simple and fast.
+
+So that Etcd can be used to test the ideas in this repo, I have created a Docker Compose file which will start an instance of Etcd within Docker on the local machine.
+
+include::setup.adoc[]
+
+include::data.adoc[]

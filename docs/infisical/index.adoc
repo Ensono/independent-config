@@ -1,0 +1,24 @@
+
+=== Infisical
+
+Infisical is an open source secret store that is designed to be run according to differing needs. It can be run as a series of containers, as shown in this example using Docker Compose, or it can be run on a Kubernetes cluster.
+
+Infisical requires a more dependencies than Etcd, but does hold secrets more securely. The Docker Compose file will start several containers locally:
+
+* Infisical
+* PostgresQL
+* Redis
+
+NOTE: The compose file contains a short-lived service that sets up the PostgresQL database with the correct schema.
+
+Additionally, Infisical requires a number of settings to get up and running. A default version of this, which contains generic settings so should not be used in production, is included in this repository.
+
+*****
+Infisical has the concept of environments per secret, e.g. you can set a secret to be part of `dev`, `test` and prod.
+
+However in the structure that I have created here, this is not applicable as the environment is part of the path. However a secret _must_ belong to a least one environment.
+
+In the examples here I have chosen to only have one Infisical environment called `default`.
+*****
+
+include::setup.adoc[]

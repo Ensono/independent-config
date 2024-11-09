@@ -1,0 +1,5 @@
+==== Issues
+
+The following things need to be looked at in the functions for Infisical:
+
+* Update the folder creation code to handle nested folders when a secret ot set with nested folders

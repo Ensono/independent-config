@@ -1,0 +1,45 @@
+== Tooling
+
+I have looked at a couple of tools to perform these tasks:
+
+[cols="^1a,^1a"]
+|===
+|
+image:images/etcd-logo.png[Etcd]
+
+https://etcd.io/[Etcd]
+| image:images/infisical-logo.png[]
+
+https://infisical.com/[Infisical]
+|===
+
+From my initial investigations, both tools can provide the platform that we can use to store this information, however they do have very different characteristics which I have outlined below.
+
+[cols="3,^1a,^1a",options="header",frame=none,grid=none]
+|===
+| | Etcd | Infisical
+| Can store configuration items and secrets | icon:fas-check[] | icon:check[]
+| Items are encrypted out of the box | icon:fas-times[] | icon:fas-check[]
+| API Access is supported | icon:fas-check[] | icon:fas-check[]
+| Can be run in containers | icon:fas-check[] | icon:fas-check[]
+| Single app deployment | icon:fas-check[] | icon:fas-times[]
+| Has a UI | icon:fas-times[] | icon:fas-check[]
+| RBAC | icon:fas-times[] | icon:fas-check[]
+| Backend stores | icon:fas-times[] | icon:fas-check[]
+|===
+
+Overall `etcd` is very quick, but it does not have native support for encrypting the data. Infisical is all about storing secrets so it is designed to do that, but this could be seen as an overhead for configuration items.
+
+Overall I think that Infisical will be the better choice for this as it can be deployed onto PaaS resources in Azure (Redis Cache, PostgresQL) so it is outside of the general infrastructure. The UI makes it easy to add new items that cannot be added automatically.
+
+However please have a play with this repo and let me know what you think. I have setup Docker Compose files for each tool so you should be able to get them up and running and poke them to see what they can do.
+
+The following sections show how to get each tool up and running. A Docker engine is required.
+
+<<<
+
+include::etcd/index.adoc[]
+
+<<<
+
+include::infisical/index.adoc[]

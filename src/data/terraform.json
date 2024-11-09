@@ -1,0 +1,32 @@
+{
+  "backend_api_application_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "bf4781c8-4aa4-4602-82cb-d8a1564792bd"
+  },
+  "backend_application_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ed-aichatbot-local-backend"
+  },
+  "frontend_application_name": {
+    "sensitive": false,
+    "type": "string",
+    "value": "ed-aichatbot-local-frontend"
+  },
+  "frontend_web_application_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "407d08c7-9799-4dda-8d18-c4309cs517a2"
+  },
+  "frontend_web_application_secret": {
+    "sensitive": true,
+    "type": "string",
+    "value": "mlG8Q~XRVe4G5gh63dFK3R7GZn8F6qAcxygHyc8."
+  },
+  "tenant_id": {
+    "sensitive": false,
+    "type": "string",
+    "value": "d483ed84-f7bf-9326-a58f-fb250feccf8f"
+  }
+}

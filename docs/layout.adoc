@@ -1,0 +1,21 @@
+:source-highlighter: rouge
+:rouge-style: monokai
+:pdf-theme: styles/theme.yml
+:table-stripes: even
+:listing-caption: Listing
+:icons: font
+:icon-set: fas
+
+= Independent Config
+
+include::introduction.adoc[]
+
+include::prereqs.adoc[]
+
+<<<
+
+include::structure.adoc[]
+
+<<<
+
+include::tooling.adoc[]

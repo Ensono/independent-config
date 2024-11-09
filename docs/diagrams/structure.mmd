@@ -1,0 +1,42 @@
+graph LR
+    root["/"] --> 1[common]
+    root --> 2[dotnet-webapi]
+    root --> 3[aks]
+
+    subgraph 1g[Common]
+        1 --> 11[environments]
+        1 --> 12[terraform_storage_name]
+        1 --> 13[terraform_storage_key]
+    end
+
+    subgraph 2g[Environments]
+      2 --> 21[dev]
+      2 --> 22[staging]
+      2 --> 23[prod]
+    end
+
+    subgraph 22g[Items]
+      21 --> 221[api-url]
+      22 --> 222[api-url]
+      23 --> 223[api-url]
+    end
+
+    subgraph 3g[Environments]
+      3 --> 31[dev]
+      3 --> 32[staging]
+      3 --> 33[prod]
+    end
+
+    subgraph 33g[Items]
+      31 --> 331[aks_cluster_name]
+      32 --> 332[aks_cluster_name]
+      33 --> 333[aks_cluster_name]
+    end
+
+linkStyle 0,1,2,3,4,5,6 stroke-width:1px;
+
+style 1g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;
+style 2g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;
+style 22g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;
+style 3g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;
+style 33g fill:transparent,stroke:#323232,stroke-width:1px,stroke-dasharray:5;

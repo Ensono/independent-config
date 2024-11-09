@@ -1,0 +1,17 @@
+==== Setup
+
+In order to get Etcd up and running locally, please following the instructions below.
+
+NOTE: It is a good idea to run the Compose command from a different terminal window.
+
+[source,powershell]
+----
+cd .\deploy\composer\etcd\
+
+docker compose -f .\docker-compose.yml up
+----
+
+.Docker startup for Etcd
+image::images/etcd-docker-compose.png[]
+
+Now that Etcd is up and running, some data needs to be added to it to check that the data can be extracted in the different formats. The `src/data` directory contains data that can be loaded in.

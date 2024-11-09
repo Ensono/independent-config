@@ -1,0 +1,23 @@
+
+The idea behind this independent config is to have a common source for secrets and configuration items. This way we allow people to access items regardless of where they are running a project and access is the same every time. The way in which configuration is handled now is very much based on the cloud platform and CI/CD system being used.
+
+.Build configuration items
+[mermaid,align=center]
+....
+graph LR
+
+    azure_kv["Azure Key Vault"] --> build[Build]
+    azure_kv --> azure_devops[Azure Devops] --> build
+    aws_kms[AWS KMS] --> build
+    env_vars[Environment Variables]:::local --> build
+    gh_secrets[GitHub Secrets] --> build
+    other[Other] .-> build
+
+    classDef local stroke:#0f0
+....
+
+NOTE: Although environment variables are used extensively in the builds when run in CI/CD they are created from the other sources. When running locally these environment variables usually have to be created manually which runs the risk of exposure of sensitive data.
+
+For example, at the moment, with all the work we have done with the https://github.com/ensono/independent-runner[Indpendent Runner], we can run pipelines locally and in ADO, GitHub Actions and any other CI/CD pipeline. However when things are run locally, environment variables have to be configured with relevant values for the runner to perform correctly.
+
+To attempt to alleviate this I am proposing a similar strategy for secrets and configuration items whereby such data is held in a central location and can be accessed by authenticated person or system that needs it. In the case of a local runner, this would allow configuration of a a few simple environment variables, which allow the Independent Runner to access this central config.

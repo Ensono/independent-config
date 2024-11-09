@@ -1,0 +1,7 @@
+== Things to look at Next
+
+* Authentication needs to be enabled and added to the PowerShell scripts.
+* Need to be able to pull all values for environment back, across all projects
+* When adding values check the configuration store to ensure the named environment exists
+** Entries to common do not need to have this check
+* Helm charts for deployments of both applications

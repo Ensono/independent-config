@@ -1,0 +1,16 @@
+variables:
+  - name: region
+    value: {{ .Project.Cloud.Region }}
+  - name: company
+    value: {{ .Input.Business.Company }}
+  - name: project
+    value: {{ .Project.Name }}
+  - name: domain
+    value: {{ .Input.Business.Domain }}
+  - name: self_repo
+    value: {{ .Project.Name }}
+  - name: self_generic_name
+    value: $(company)-$(domain)
+
+  - name: cloud_provider
+    value: "{{ .Input.Cloud.Platform}}"

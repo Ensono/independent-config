@@ -1,0 +1,11 @@
+{
+    "name": "PowerShell Environment",
+    "image": "ensono/eir-infrastructure:latest",
+    "customizations": {
+        "vscode": {
+            "settings": {
+               "terminal.integrated.shell.linux": "/opt/microsoft/powershell/7/pwsh"
+            }
+        }
+    }
+}

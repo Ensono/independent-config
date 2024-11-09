@@ -1,0 +1,21 @@
+== Structure
+
+After having thought about the structure we could use, and the tools that can achieve that, I have come up with the following suggestion.
+
+.Secret and configuration item structure
+[mermaid]
+....
+include::diagrams/structure.mmd[]
+....
+
+Each child of the root directory will have the name of the project to which is related. This will be governed by the project name at provisioning time. For each project there will be a set of environment folders, apart from the `common` project.
+
+The `common` project will hold all the information that is common to all projects. Think of this as the storage of the all the resources from the https://github.com/Ensono/stacks-ancillary[Stacks Ancillary] project, e.g. Terraform state storage.
+
+NOTE: The Stacks Ancillary resource does not need to be used to populate this `common` project, it is used as an example of what can be used to populate this area of the structure.
+
+Additionally the `common` section will contain a comma delimited list of the environments that are configured. This is to address situations where we ne4ed to iterate over the environments to create a resource in each one.
+
+Each subsequent `project` folder will then contain a folder for each environment and the appropriate values set in that folder.
+
+In all cases Terraform outputs will be injected in to the relevant folder in the structure from outputs. This allows automated systems to get access to the items without having to resort to cross state lookups. Additionally it allows items to be added from different sources as required.

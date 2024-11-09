@@ -1,0 +1,58 @@
+nameOverride: "infisical"
+fullnameOverride: "infisical"
+
+infisical:
+  enabled: true
+  name: infisical
+  autoDatabaseSchemaMigration: true
+  fullnameOverride: ""
+  podAnnotations: {}
+  deploymentAnnotations: {}
+  replicaCount: 1
+
+  image:
+    repository: infisical/infisical
+    tag: v0.86.1-postgres
+    pullPolicy: IfNotPresent
+
+  affinity: {}
+  kubeSecretRef: "infisical-secrets"
+  service:
+    annotations: {}
+    type: ClusterIP
+    nodePort: ""
+
+  resources:
+    limits:
+      memory: 210Mi
+    requests:
+      cpu: 200m
+
+ingress:
+  enabled: true
+  hostName: ""
+  ingressClassName: nginx
+  nginx:
+    enabled: true
+  annotations: {}
+  tls: []
+
+postgresql:
+  enabled: true
+  name: "postgresql"
+  fullnameOverride: "postgresql"
+  auth:
+    username: infisical
+    password: root
+    database: infisicalDB
+
+redis:
+  enabled: true
+  name: "redis"
+  fullnameOverride: "redis"
+  cluster:
+    enabled: false
+  usePassword: true
+  auth:
+    password: "mysecretpassword"
+  architecture: standalone

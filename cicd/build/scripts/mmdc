@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mmdc --puppeteerConfigFile /app/cicd/build/conf/puppeteer-config.json $@

@@ -1,0 +1,7 @@
+import:
+  - ./cicd/build/taskctl/contexts.yml
+  - ./cicd/build/taskctl/tasks.yml
+
+pipelines:
+  docs:
+    - task: _docs

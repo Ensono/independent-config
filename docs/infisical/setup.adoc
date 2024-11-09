@@ -1,0 +1,24 @@
+==== Setup
+
+It is a good idea to get start the containers from a separate terminal window. This will mean that the VSCode is not blocked by the containers and it is possible to run the examples in this repo.
+
+[source,powershell]
+----
+cd .\deploy\composer\infisical\
+
+docker compose -f .\docker-compose.yml up
+----
+
+.Docker startup for Infisical
+image::images/infisical-docker-compose.png[]
+
+The composer image starts up Infisical so it can be accessed from the local machine on port, e.g. http://localhost. The first time the site is accessed, a new admin user and password needs to be created.
+
+.Create initial user in Infisical
+image::images/infisical-initial-user.png[]
+
+NOTE: After creating the initial user, a page will be displayed that prompts the download of a PDF file. This file contains the emergency access if the admin user is lost.
+
+Out of the box, Infisical requires authentication for API access. Using an API key is being deprecated in favour of Machine Identity. Please use the following link to create a Token for the API access.
+
+https://infisical.com/docs/documentation/platform/identities/token-auth

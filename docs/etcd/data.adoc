@@ -1,0 +1,129 @@
+==== Data
+
+The configuration system does not work too well if there is no data to work with. The following sub sections show how to load data into Etcd, using output from Terraform and then how to retrieve that data in various different formats.
+
+===== Load
+
+Now run the following commands in the terminal to load data into Etcd.
+
+[source,powershell,linenums]
+----
+cd src/
+
+# Set the server for the script to use
+$env:CONFIG_SERVER = "http://host.docker.internal:12379"
+
+# Source the PowerShell file to load the data
+. ./Set-ConfigItem.ps1
+
+# Load the data into Etcd
+Set-ConfigItem -Project ai-chatbot -Environment dev -Values ./data/terraform.json -Etcd -Flavour terraform
+----
+
+image::images/etcd-load-data.png[]
+
+The `Values` parameter also supports data from the pipeline, so it is possible to get the content of a file and pipe it into the command, for example:
+
+[source,powershell]
+----
+Get-Content -Path ./data/terraform.json -Raw | Set-ConfigItem -Project ai-chatbot -Environment dev -Flavour terraform -etcd
+----
+
+The script requires the URL for the Etcd server which is set as an enviornment variable on line 4.
+
+Line 10 shows how the Terraform JSON file is loaded into the config store. This follows the structure as detailed in the <<Secret and configuration item structure>> diagram. It takes the project and environment as parameters and then the JSON file. The `flavour` option informs the function that the data being presented is in the Terraform format, so it then knows how to extract the data.
+
+The `Etcd` switch informs the function which backend is being used, in this case it is Etcd. This is so that different backends can be tested for this idea.
+
+===== Retrieve
+
+Now that the config store has been seeded with data it is possible to extract this information in may different formats. The following is a list of examples that show how the data can be extracted.
+
+As can be seen from the examples this provides a very flexible way, both locally and in a CICD pipeline, to extract data without having to setup enviornment variables and configuration files manually.
+
+Before running any of the examples, ensure that the `CONFIG_SERVER` env var has been set and that the `Get-ConfigItem.ps1` script has been sourced.
+
+====== Example 1: Retrive one item as hashtable
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev/tenant_id -Etcd
+----
+
+image::images/etcd-example-1.png[]
+
+====== Example 2: Retrive all items for project and environment as hashtable
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd
+----
+
+image::images/etcd-example-2.png[]
+
+====== Example 3: Retrive all items for project and environment as JSON
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format json
+----
+
+image::images/etcd-example-3.png[]
+
+====== Example 4: Retrive all items for project and environment as JSON and save to file
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format json | Out-File config.json
+----
+
+image::images/etcd-example-4.png[]
+
+In all examples the `OutFile` option can be used to pipe data into a file, as shown above.
+
+====== Example 5: Retrive all items for project and environment as YAML
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format yaml
+----
+
+image::images/etcd-example-5.png[]
+
+====== Example 6: Retrive all items for project and environment and expose as ADO variables
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format ado
+----
+
+image::images/etcd-example-6.png[]
+
+====== Example 7: Retrive all items for project and environment and set as environment variables
+
+This example exports the configuration settings from the config store as enviornment variables. It also includes a prefix which can be used to set up the environment variable names as required.
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format env:TF_VAR_
+----
+
+.Command output when setting environment variables
+image::images/etcd-example-7-cmd-output.png[]
+
+[cols="1a,1a",frame=none,grid=none]
+|===
+| image:images/etcd-example-7-before.png[]
+| image:images/etcd-example-7-after.png[]
+|===
+
+===== Example 8: Create an env file
+
+This example creates an envfile compatible file.
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -Etcd -Format kv | Out-File ./env
+----
+
+image::images/etcd-example-8.png[]
