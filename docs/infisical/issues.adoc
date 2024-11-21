@@ -2,4 +2,5 @@
 
 The following things need to be looked at in the functions for Infisical:
 
-* Update the folder creation code to handle nested folders when a secret ot set with nested folders
+* Update the folder creation code to handle nested folders when a secret is set within nested folders
+* Dynamically add a project if it does not already exist in Infisical

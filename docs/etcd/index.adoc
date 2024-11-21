@@ -9,3 +9,5 @@ So that Etcd can be used to test the ideas in this repo, I have created a Docker
 include::setup.adoc[]
 
 include::data.adoc[]
+
+include::issues.adoc[]

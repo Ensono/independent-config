@@ -57,7 +57,16 @@ function Get-ConfigItem() {
 
     # If Infisical is used, get the value from Infisical
     if ($Infisical.IsPresent) {
-        $items = Get-InfisicalValue -Server $Server -Project $Project -Name $Path
+
+        # if the project has not been explicilty set, infer it from the path that has been given
+        if ([string]::IsNullOrEmpty($Project)) {
+            $Project, $remaining = $Path.Split("/")
+            $path = $remaining -join "/"
+        } else {
+            $path = $Path
+        }
+
+        $items = Get-InfisicalValue -Server $Server -Project $Project -Name $path
     }
 
 

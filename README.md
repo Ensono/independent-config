@@ -1,7 +1,19 @@
-# Stacks Project Template
+# Independent Config
 
-This repository is the template from which projects should be created. This allows the same structure to be used across projects and means that maintenance of projects is easier.
+This repository details the idea of having an Independent Configuration system. This does not rely on Azure DevOps or GitHub Actions secrets and provides a way for people to get configuration to run pipelines locally without setting up lots of environment variables.
 
-## Creating a new project
+This is at the PoC stage at the moment.
 
-Creating a new project from this template requires the use of the StacksCLI.
+## Documenation
+
+The documentation is in AsciiDoc format in the `docs/` directory.
+
+> [!IMPORTANT]
+> The repo uses Ensono Independent runner to generate the docs, however version 2.x of `taskctl` needs to be used.
+
+To generate the documentaion in PDF format run the following commands.
+
+```
+# Run the generation command
+taskctl docs
+```

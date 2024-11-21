@@ -1,0 +1,121 @@
+:config_backend: Infisical
+
+==== Data
+
+The following sections show how data can be loaded into and retrieved from Infisical.
+
+NOTE: The process has been specifically designed to be the same regardless of the backend being used.
+
+===== Load
+
+Run the following commands to load in the data.
+
+[source,powershell,linenums]
+----
+cd src/
+
+# Set the server for the script to use
+$env:CONFIG_SERVER = "http://host.docker.internal"
+
+# Source the PowerShell file to load the data
+. ./Set-ConfigItem.ps1
+
+# Load the data into Etcd
+Set-ConfigItem -Project ai-chatbot -Environment dev -Values ./data/terraform.json -Infisical -Flavour terraform
+----
+
+==== Retrieve
+
+As with Etcd the data is now retrievable using the `Get-ConfigItem` function. The following examples show how the Infisical backend is used to extract data.
+
+===== Example 1: Retrieve one item as hashtable
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev/tenant_id -{config_backend}
+----
+
+[NOTE]
+====
+{config_backend} stores the data slightly differently, so everything is assigned to a project. In the example code above the project is part of the path, it is the first segment.
+
+It is possible, but not recommended (as it breaks compatibility), to use the `Project` parameter to specify the project.
+====
+
+image::images/infisical-example-1.png[]
+
+===== Example 2: Retrieve all items for project and environment as hashtable
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev/tenant_id -{backend}
+----
+
+image::images/infisical-example-2.png[]
+
+====== Example 3: Retrieve all items for project and environment as JSON
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format json
+----
+
+image::images/infisical-example-3.png[]
+
+====== Example 4: Retrive all items for project and environment as JSON and save to file
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format json | Out-File config.json
+----
+
+image::images/infisical-example-4.png[]
+
+In all examples the `OutFile` option can be used to pipe data into a file, as shown above.
+
+====== Example 5: Retrive all items for project and environment as YAML
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format yaml
+----
+
+image::images/infisical-example-5.png[]
+
+====== Example 6: Retrive all items for project and environment and expose as ADO variables
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format ado
+----
+
+image::images/infisical-example-6.png[]
+
+====== Example 7: Retrive all items for project and environment and set as environment variables
+
+This example exports the configuration settings from the config store as environment variables. It also includes a prefix which can be used to set up the environment variable names as required.
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format env:TF_VAR_
+----
+
+.Command output when setting environment variables
+image::images/infisical-example-7-cmd-output.png[]
+
+[cols="1a,1a",frame=none,grid=none]
+|===
+| image:images/infisical-example-7-before.png[]
+| image:images/infisical-example-7-after.png[]
+|===
+
+===== Example 8: Create an env file
+
+This example creates an envfile compatible file.
+
+[source,powershell]
+----
+Get-ConfigItem -Path ai-chatbot/dev -{backend} -Format kv | Out-File ./env
+----
+
+image::images/infisical-example-8.png[]

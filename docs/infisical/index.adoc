@@ -22,3 +22,7 @@ In the examples here I have chosen to only have one Infisical environment called
 *****
 
 include::setup.adoc[]
+
+include::data.adoc[]
+
+include::issues.adoc[]

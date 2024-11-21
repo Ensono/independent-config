@@ -9,7 +9,11 @@
       "pdf-theme={{ basepath }}/cicd/build/conf/pdf/theme.yml",
       "pdf-fontsdir=\"{{ basepath }}/docs/styles/fonts;GEM_FONTS_DIR\"",
       "allow-uri-read",
-      "mmdc=/app/cicd/build/scripts/mmdc"
+      "mmdc=/app/cicd/build/scripts/mmdc",
+      "java=/usr/bin/java",
+      "graphvizdot=/usr/bin/dot",
+      "convert=/usr/bin/convert",
+      "identify=/usr/bin/identify"
     ]
   },
   "html": {

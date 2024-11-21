@@ -3,5 +3,4 @@ tasks:
     description: Build Docs for Stacks CLI
     context: docs
     command:
-      - |
-        Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json
+      - Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json

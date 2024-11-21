@@ -1,6 +1,8 @@
 # Import the necesssary files
 . "$PSScriptRoot\Get-EtcdValue.ps1"
 . "$PSScriptRoot\Set-EtcdValue.ps1"
+. "$PSScriptRoot\Set-InfisicalValue.ps1"
+. "$PSScriptRoot\Get-InfisicalValue.ps1"
 
 function Set-ConfigItem() {
 

@@ -1,59 +1,19 @@
 contexts:
-  infra:
-    executable:
-      bin: docker
-      args:
-        - run
-        - --rm
-        - -v
-        - ${PWD}:/app
-        - -v
-        - /var/run/docker.sock:/var/run/docker.sock
-        - --env-file
-        - envfile
-        - -e
-        - PSModulePath=/modules
-        - -w
-        - /app
-        - ensonostacks/eir-infrastructure
-        - pwsh
-        - -NoProfile
-        - -Command
-    quote: "'"
-    envfile:
-      generate: true
-      exclude:
-        - path
-        - home
-        - sourceversionmessage
-
   docs:
-    executable:
-      bin: docker
-      args:
-        - run
-        - --rm
-        - -v
-        - ${PWD}:/app
-        - -v
-        - /var/run/docker.sock:/var/run/docker.sock
-        - --env-file
-        - envfile
-        - -e
-        - PSModulePath=/modules
-        - -w
-        - /app
-        - ensono/eir-asciidoctor
-        - pwsh
-        - -NoProfile
+    container:
+      name: ensono/eir-asciidoctor
+      container_args:
+        - -v ${PWD}:/app
+      shell: pwsh
+      shell_args:
+        - -NonInteractive
         - -Command
-    quote: "'"
     envfile:
-      generate: true
       exclude:
-        - path
-        - home
-        - sourceversionmessage
-        - temp
-        - tmp
-        - posh_azure_subscription
+        - PATH
+        - HOME
+        - TEMP
+        - TMP
+        - POSH_AZURE_SUBSCRIPTION
+
+output: prefixed

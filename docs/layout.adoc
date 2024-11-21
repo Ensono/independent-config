@@ -19,3 +19,11 @@ include::structure.adoc[]
 <<<
 
 include::tooling.adoc[]
+
+<<<
+
+include::powershell.adoc[]
+
+<<<
+
+include::next.adoc[]

@@ -1,7 +1,20 @@
 == Things to look at Next
 
-* Authentication needs to be enabled and added to the PowerShell scripts.
+* Authentication needs to be enabled and added to the PowerShell scripts
+** Authentication is built into Inifiscal API
+** For Etcd, an API key needs to be generated and added to the config for Etcd when it starts up
 * Need to be able to pull all values for environment back, across all projects
+** Currently can only retrieve all items for a specific project and environment
 * When adding values check the configuration store to ensure the named environment exists
 ** Entries to common do not need to have this check
-* Helm charts for deployments of both applications
+* Decide on the infrastructure for the configuration store
+** If using Kubernetes then obtain or build Helm charts
+** If using PaaS components build up the Terraform to deploy the components
+*** Azure Redis Cache
+*** Azure Database for PostgreSQL
+*** Azure Container Apps
+* Add the scripts to the Independent Runner repo so that it is part of EIR
+* Choose a a project with Terraform output that can be pushed to a configuration deployment
+* Need to add TLS certificates to the endpoint
+
+Ideally the config should be separate to the main Stacks deployment, e.g. out of band so that is is not removed by accident. This is achievable by using PaaS components.

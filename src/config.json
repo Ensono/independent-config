@@ -1,8 +1,8 @@
 {
   "backend_application_name": "ed-aichatbot-local-backend",
-  "frontend_web_application_secret": "mlG8Q~XRVe4G5gh63dFK3R7GZn8F6qAcxygHyc8.",
-  "frontend_application_name": "ed-aichatbot-local-frontend",
+  "backend_api_application_id": "bf4781c8-4aa4-4602-82cb-d8a1564792bd",
   "tenant_id": "d483ed84-f7bf-9326-a58f-fb250feccf8f",
-  "frontend_web_application_id": "407d08c7-9799-4dda-8d18-c4309cs517a2",
-  "backend_api_application_id": "bf4781c8-4aa4-4602-82cb-d8a1564792bd"
+  "frontend_application_name": "ed-aichatbot-local-frontend",
+  "frontend_web_application_secret": "mlG8Q~XRVe4G5gh63dFK3R7GZn8F6qAcxygHyc8.",
+  "frontend_web_application_id": "407d08c7-9799-4dda-8d18-c4309cs517a2"
 }

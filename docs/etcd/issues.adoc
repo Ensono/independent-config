@@ -1,0 +1,6 @@
+==== Issues
+
+The following has not been setup in this example:
+
+* No authentication has been set in the Etcd container, although this is supported
+* Need to investigate how to encrypt the data in the configuration backend

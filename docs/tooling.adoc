@@ -2,15 +2,15 @@
 
 I have looked at a couple of tools to perform these tasks:
 
-[cols="^1a,^1a"]
+[cols="^1a,^1a",frame=none,grid=none]
 |===
 |
-image:images/etcd-logo.png[Etcd]
+image:images/etcd-logo.png[Etcd,align="center]
 
 https://etcd.io/[Etcd]
-| image:images/infisical-logo.png[]
+| image:images/infisical-logo.png[Infiscal,align="center]
 
-https://infisical.com/[Infisical]
+https://infisical.com/[Infisical,align="center]
 |===
 
 From my initial investigations, both tools can provide the platform that we can use to store this information, however they do have very different characteristics which I have outlined below.
@@ -35,6 +35,25 @@ Overall I think that Infisical will be the better choice for this as it can be d
 However please have a play with this repo and let me know what you think. I have setup Docker Compose files for each tool so you should be able to get them up and running and poke them to see what they can do.
 
 The following sections show how to get each tool up and running. A Docker engine is required.
+
+### Configuration
+
+In order to get the scripts to communicate with the running backend a number of environment variables are required. The example below shows the settings that are required.
+
+NOTE: The example show below is for setting environment variables in PowerShell.
+
+[source,powershell]
+----
+# URL to the server being used. This is required for both backends
+$env:CONFIG_SERVER = "http://localhost"
+
+# Configuration details for the Infisical backend
+# These details are for the Machine Identity that has been created
+$env:INFISICAL_CLIENT_ID = "140871c6-d5b0-43b4-b90e-209a2dcb9a40"
+$env:INFISICAL_CLIENT_SECRET = "3c21543d5b1b7e559ab322cd1609ec9b569a8e188bfbade3011654af9224d29b"
+$env:INFISICAL_ORG_ID = "ceb2ab7b-9824-4f3d-94cc-6b2a9dc71e55"
+
+----
 
 <<<
 

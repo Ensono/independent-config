@@ -1,0 +1,17 @@
+== PowerShell Functions
+
+There are a number of PowerShell scripts in the `src/` directory that have been used to create the PoC. The following table details what the scripts do.
+
+[cols="1,3a", options="header"]
+|===
+| Name | Description
+| `Get-ConfigItem.ps1` | Wrapper script that calls the appropriate backend script to get the configuration item.
+| `Get-EtcdValue.ps1` | Script to get data from the Etcd backend
+| `Get-InfisicalValue.ps1` | Script to get data from the Infisical backend
+| `Set-ConfigItem.ps1` | Wrapper script that calls the appropriate backend script to set configuration items in the chosen backend
+| `Set-EtcdValue.ps1` | Script to set data in the Etcd backend
+| `Set-InfisicalValue.ps1` | Script to set data in the Infisical backend
+| `infisical/Get-ProjectID.ps1` | Get the GUID of the project from Infisical using the specified name
+| `infisical/Get-Token.ps1` | Obtain a token from Infisical given the manage identity details
+| `infisical/Set-SecretFolder.ps1` | Set a folder in the project within Infisical if it does not exist
+|===
