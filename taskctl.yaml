@@ -7,7 +7,4 @@ pipelines:
     - task: _docs
 
     release:
-    - task: buildnumber
     - task: _release
-      depends_on:
-        - buildnumber

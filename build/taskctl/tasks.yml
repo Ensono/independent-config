@@ -4,9 +4,3 @@ tasks:
     context: docs
     command:
       - Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json
-
-  buildnumber:
-    context: docs
-    command:
-      - /app/build/scripts/Set-BuildNumber.ps1 $BUILDNUMBER
-    exportAs: BUILDNUMBER
