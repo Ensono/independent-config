@@ -6,7 +6,7 @@
   "libs": ["asciidoctor-diagram"],
   "pdf": {
     "attributes": [
-      "pdf-theme={{ basepath }}/cicd/build/conf/pdf/theme.yml",
+      "pdf-theme={{ basepath }}/build/conf/pdf/theme.yml",
       "pdf-fontsdir=\"{{ basepath }}/docs/styles/fonts;GEM_FONTS_DIR\"",
       "allow-uri-read",
       "mmdc=/app/build/scripts/mmdc",
