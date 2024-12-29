@@ -1,5 +1,5 @@
 {
-  "title": "Stacks Independent Config - {{ BUILD.BUILDNUMBER }}",
+  "title": "Stacks Independent Config - {{ BUILD_BUILDNUMBER }}",
   "output": "{{ basepath }}/outputs/docs/{{ format }}",
   "trunkBranch": "main",
   "path": "{{ basepath }}/docs/layout.adoc",
