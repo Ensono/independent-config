@@ -6,7 +6,7 @@ tasks:
       - Invoke-AsciiDoc -PDF -basepath /app -config /app/docs.json
 
   _release:
-    context: buildenv
+    context: docs
     command:
       - Write-Host "Publish-GitHubRelease -version $BUILD_BUILDNUMBER -commitId $COMMIT_ID -apikey $GITHUB_TOKEN -artifactsDir $ARTIFACTS_DIR -Owner $OWNER -repository $REPOSITORY"
       - Publish-GitHubRelease -version $BUILD_BUILDNUMBER -commitId $COMMIT_ID -apikey $GITHUB_TOKEN -artifactsDir $ARTIFACTS_DIR -Owner $OWNER -repository $REPOSITORY
