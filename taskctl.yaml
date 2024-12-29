@@ -1,6 +1,6 @@
 import:
-  - ./cicd/build/taskctl/contexts.yml
-  - ./cicd/build/taskctl/tasks.yml
+  - ./build/taskctl/contexts.yml
+  - ./build/taskctl/tasks.yml
 
 pipelines:
   docs:
