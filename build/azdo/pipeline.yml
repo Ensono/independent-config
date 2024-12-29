@@ -33,8 +33,8 @@ stages:
               targetType: inline
               script: |
                 taskctl docs
-              env:
-                BUILDNUMBER: $(Build.BuildNumber)
+            env:
+              BUILDNUMBER: $(Build.BuildNumber)
 
           - task: PublishBuildArtifacts@1
             displayName: "Upload generated docs"
