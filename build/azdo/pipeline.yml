@@ -53,6 +53,10 @@ stages:
       - job: GitHub
 
         steps:
+          - template: templates/setup.yml
+            parameters:
+              TaskctlVersion: ${{ variables.TaskctlVersion }}
+
           # Download the necessary artifacts from the previous stage
           # - documentation
           - task: DownloadPipelineArtifact@2
