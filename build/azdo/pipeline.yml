@@ -23,7 +23,7 @@ stages:
       - job: Documentation
 
         steps:
-          - template: templates/setup.yaml
+          - template: templates/setup.yml
             parameters:
               TaskctlVersion: ${{ variables.TaskctlVersion }}
 
