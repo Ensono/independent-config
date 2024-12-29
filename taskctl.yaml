@@ -6,5 +6,5 @@ pipelines:
   docs:
     - task: _docs
 
-    release:
+  release:
     - task: _release
