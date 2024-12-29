@@ -10,3 +10,4 @@ steps:
       script: |
         rm -rf
         wget https://github.com/Ensono/taskctl/releases/download/${{ parameters.TaskctlVersion }}/taskctl-linux-amd64 -O /usr/local/bin/taskctl
+        chmod +x /usr/local/bin/taskctl
