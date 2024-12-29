@@ -9,5 +9,4 @@ steps:
       targetType: inline
       script: |
         rm -rf
-        wget https://github.com/Ensono/taskctl/releases/download/${{ parameters.TaskctlVersion }}/taskctl-linux-amd64 -O /tmp/taskctl.tar.gz
-        tar zxf /tmp/taskctl.tar.gz -C /usr/local/bin taskctl
+        wget https://github.com/Ensono/taskctl/releases/download/${{ parameters.TaskctlVersion }}/taskctl-linux-amd64 -O /usr/local/bin/taskctl
