@@ -1,4 +1,4 @@
-name: 0.1$($rev:.r)
+name: 0.0$($rev:.r)
 
 pr:
   - main
@@ -18,58 +18,64 @@ variables:
 
 # Configure stages of the build
 stages:
-  - stage: Documentation
+  - stage: Build
     jobs:
-      - template: templates/setup.yaml
-        parameters:
-          TaskctlVersion: ${{ variables.TaskctlVersion }}
+      - job: Documentation
 
-      - task: Bash@3
-        displayName: Build Documentation
-        inputs:
-          targetType: inline
-          script: |
-            taskctl docs
-          env:
-            BUILDNUMBER: $(Build.BuildNumber)
+        steps:
+          - template: templates/setup.yaml
+            parameters:
+              TaskctlVersion: ${{ variables.TaskctlVersion }}
 
-      - task: PublishBuildArtifacts@1
-        displayName: "Upload generated docs"
-        inputs:
-          pathToPublish: $(Build.SourcesDirectory)/outputs/docs/
-          artifactName: docs
+          - task: Bash@3
+            displayName: Build Documentation
+            inputs:
+              targetType: inline
+              script: |
+                taskctl docs
+              env:
+                BUILDNUMBER: $(Build.BuildNumber)
+
+          - task: PublishBuildArtifacts@1
+            displayName: "Upload generated docs"
+            inputs:
+              pathToPublish: $(Build.SourcesDirectory)/outputs/docs/
+              artifactName: docs
 
   - stage: Release
     dependsOn:
-      - Documentation
+      - Build
 
     variables:
       - group: github-creds
 
     jobs:
-      # Download the necessary artifacts from the previous stage
-      # - documentation
-      - task: DownloadPipelineArtifact@2
-        inputs:
-          artifact: "docs"
-          patterns: "**/*.pdf"
-          path: $(Build.SourcesDirectory)/outputs/assets
+      - job: GitHub
 
-      # Run the tasks to release the built artifacts
-      - task: Bash@3
-        displayName: Release
-        inputs:
-          targetType: inline
-          script: |
-            taskctl release
-        env:
-          STAGE: "release"
-          PUBLISH_RELEASE: "true"
-          GITHUB_TOKEN: "$(GITHUB_TOKEN)"
-          OWNER: ensono
-          REPOSITORY: independent-config
-          BUILD_BUILDNUMBER: $(BUILD_BUILDNUMBER)
-          COMMIT_ID: $(Build.SourceVersion)
-          ARTIFACTS_DIR: /app/outputs/assets
-          ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
-            PRERELEASE: "true"
+        steps:
+          # Download the necessary artifacts from the previous stage
+          # - documentation
+          - task: DownloadPipelineArtifact@2
+            inputs:
+              artifact: "docs"
+              patterns: "**/*.pdf"
+              path: $(Build.SourcesDirectory)/outputs/assets
+
+          # Run the tasks to release the built artifacts
+          - task: Bash@3
+            displayName: Release
+            inputs:
+              targetType: inline
+              script: |
+                taskctl release
+            env:
+              STAGE: "release"
+              PUBLISH_RELEASE: "true"
+              GITHUB_TOKEN: "$(GITHUB_TOKEN)"
+              OWNER: ensono
+              REPOSITORY: independent-config
+              BUILD_BUILDNUMBER: $(BUILD_BUILDNUMBER)
+              COMMIT_ID: $(Build.SourceVersion)
+              ARTIFACTS_DIR: /app/outputs/assets
+              ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+                PRERELEASE: "true"
