@@ -1,0 +1,75 @@
+name: 0.1$($rev:.r)
+
+pr:
+  - main
+
+trigger:
+  branches:
+    include:
+      - main
+
+# Set the agent pool that the pipeline will run on
+pool:
+  vmImage: ubuntu-24.04
+
+# Include the variables file
+variables:
+  - template: pipeline-vars.yml
+
+# Configure stages of the build
+stages:
+  - stage: Documentation
+    jobs:
+      - template: templates/setup.yaml
+        parameters:
+          TaskctlVersion: ${{ variables.TaskctlVersion }}
+
+      - task: Bash@3
+        displayName: Build Documentation
+        inputs:
+          targetType: inline
+          script: |
+            taskctl docs
+          env:
+            BUILDNUMBER: $(Build.BuildNumber)
+
+      - task: PublishBuildArtifacts@1
+        displayName: "Upload generated docs"
+        inputs:
+          pathToPublish: $(Build.SourcesDirectory)/outputs/docs/
+          artifactName: docs
+
+  - stage: Release
+    dependsOn:
+      - Documentation
+
+    variables:
+      - group: github-creds
+
+    jobs:
+      # Download the necessary artifacts from the previous stage
+      # - documentation
+      - task: DownloadPipelineArtifact@2
+        inputs:
+          artifact: "docs"
+          patterns: "**/*.pdf"
+          path: $(Build.SourcesDirectory)/outputs/assets
+
+      # Run the tasks to release the built artifacts
+      - task: Bash@3
+        displayName: Release
+        inputs:
+          targetType: inline
+          script: |
+            taskctl release
+        env:
+          STAGE: "release"
+          PUBLISH_RELEASE: "true"
+          GITHUB_TOKEN: "$(GITHUB_TOKEN)"
+          OWNER: ensono
+          REPOSITORY: independent-config
+          BUILD_BUILDNUMBER: $(BUILD_BUILDNUMBER)
+          COMMIT_ID: $(Build.SourceVersion)
+          ARTIFACTS_DIR: /app/outputs/assets
+          ${{ if ne(variables['Build.SourceBranch'], 'refs/heads/main') }}:
+            PRERELEASE: "true"

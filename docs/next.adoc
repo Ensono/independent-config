@@ -16,5 +16,8 @@
 * Add the scripts to the Independent Runner repo so that it is part of EIR
 * Choose a a project with Terraform output that can be pushed to a configuration deployment
 * Need to add TLS certificates to the endpoint
+* Look into the supported backends and features for Infisical
+** https://infisical.com/docs/integrations/cloud/azure-key-vault[Azure Key-Vault]
+** https://infisical.com/docs/documentation/platform/dynamic-secrets/overview[Dynamic Secrets]
 
 Ideally the config should be separate to the main Stacks deployment, e.g. out of band so that is is not removed by accident. This is achievable by using PaaS components.

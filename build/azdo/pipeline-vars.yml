@@ -1,0 +1,3 @@
+variables:
+  - name: TaskctlVersion
+    value: 2.0.2
